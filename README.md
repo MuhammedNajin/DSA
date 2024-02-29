@@ -37,4 +37,4 @@ To get started with this repository, follow these steps:
 
 1. Clone the repository to your local machine.
    ```bash
-   git clone https://github.com/your-username/DSA-learning-repo.git
+   [git clone https://github.com/your-username/DSA-learning-repo.git](https://github.com/MuhammedNajin/DSA.git)https://github.com/MuhammedNajin/DSA.git
