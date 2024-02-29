@@ -1,0 +1,23 @@
+
+Complexity analysis is a technique in computer science used to measure the efficiency of algorithms based on the resources they require, primarily focusing on time and space. It helps us understand how an algorithm's performance scales with the size of its input data.
+
+Here's a breakdown of the key points:
+
+Focus: Analyzes how time and space requirements of an algorithm change with respect to the input size (n).
+Goal: Evaluate the efficiency of algorithms and compare them for specific tasks.
+Metrics:
+Time complexity: Measures the execution time of the algorithm in terms of the number of basic operations it performs as the input size grows. It's commonly expressed using Big O notation, which represents the upper bound of the algorithm's execution time.
+Space complexity: Measures the memory space required by the algorithm as the input size grows. It's also often expressed using Big O notation.
+Why is it important?
+
+Informed decision making: Helps choose the most suitable algorithm for a specific task based on its efficiency and resource constraints.
+Performance optimization: Identifies potential bottlenecks and areas for improvement in an algorithm's design and implementation.
+Understanding algorithm behavior: Provides insights into how well an algorithm performs with different input sizes and helps predict its behavior in real-world scenarios.
+Here's an example:
+
+Imagine two sorting algorithms:
+Algorithm A takes 5n steps to sort a list of size n, meaning its time complexity is O(n).
+Algorithm B takes n^2 steps to sort the same list, meaning its time complexity is O(n^2).
+Based on complexity analysis, algorithm A is considered more efficient because its time complexity grows linearly with the input size, while algorithm B's complexity grows quadratically, making it significantly slower for larger datasets.
+
+In summary, complexity analysis is a crucial tool in computer science that helps us understand, compare, and optimize algorithms by evaluating their resource requirements in relation to the size of the data they handle.
