@@ -80,3 +80,26 @@ Algorithm B takes n^2 steps to sort the same list, meaning its time complexity i
 Based on complexity analysis, algorithm A is considered more efficient because its time complexity grows linearly with the input size, while algorithm B's complexity grows quadratically, making it significantly slower for larger datasets.
 
 In summary, complexity analysis is a crucial tool in computer science that helps us understand, compare, and optimize algorithms by evaluating their resource requirements in relation to the size of the data they handle.
+
+
+# Big O notation
+
+
+Big O notation is a mathematical tool used in complexity analysis to describe the upper bound of an algorithm's time complexity or space complexity as the input size grows. It provides a way to categorize and compare the performance of different algorithms for the same problem.
+
+Here are the key points about Big O notation:
+
+Focuses on the dominant term: It ignores constant factors and lower-order terms in the complexity function, focusing on the term that grows the fastest with the input size. This is because the constant factors and lower-order terms become less significant as the input size becomes very large.
+Upper bound: It represents the worst-case scenario for an algorithm's resource usage. While an algorithm might not always take the maximum time or space in all cases, Big O notation helps understand the worst-case behavior.
+Notation: It uses the letter O followed by an expression in parentheses, like O(n^2) or O(log n). The expression inside the parentheses represents the dominant term of the complexity function with respect to the input size (n).
+Examples of Big O notation:
+
+O(1): Constant time complexity, meaning the execution time remains constant regardless of the input size. This is common for simple operations like accessing an element in an array by index.
+O(n): Linear time complexity, meaning the execution time grows linearly with the input size. This is often seen in loops that iterate through the entire input data.
+O(n^2): Quadratic time complexity, meaning the execution time grows proportionally to the square of the input size. This can occur in nested loops or algorithms involving comparisons between all pairs of elements.
+O(log n): Logarithmic time complexity, meaning the execution time grows logarithmically with the input size. This is typically seen in efficient search algorithms like binary search.
+Understanding Big O notation is crucial for:
+
+Evaluating algorithm performance: Comparing the efficiency of different algorithms for the same problem.
+Making informed decisions: Choosing the most suitable algorithm for a specific task based on its complexity and the expected input size.
+Optimizing code: Identifying and improving sections of code that contribute significantly to the overall complexity.
