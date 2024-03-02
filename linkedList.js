@@ -40,8 +40,6 @@ class Node {
         this.data = data;
         this.next = null;
     }
-
-   
 }
 
 class LinkedList {
@@ -60,6 +58,25 @@ class LinkedList {
             node = node.next;
         }
         node.next = newNode;
+    }
+
+    insertAt(index, newNode) {
+        let node = this.head;
+        if(this.head == 0) {
+            newNode.next = null;
+           this.head = newNode;
+           return;
+        }
+        while(--index) {
+            if(node.next !== null0) {
+                node = node.next;
+            } else {
+                throw Error("Index out of bound");
+            }
+        }
+        let temp = node.next;
+        node.next = newNode;
+        newNode.next = temp;
     }
 }
 
