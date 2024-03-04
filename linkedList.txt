@@ -162,26 +162,6 @@ Let me know if you'd like to explore more examples or specific scenarios!
 Strict structure based on the Node and LinkedList classes. which means
 Show drafts
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ### When you hear "strict structure based on the Node and LinkedList classes,"
  it refers to a data organization that adheres to a specific set of rules defined by these two fundamental building blocks in computer science. Here's a breakdown: 
 
@@ -209,3 +189,84 @@ However, strictness also implies limitations:
 Limited access: Random access to specific elements is generally slower compared to structures like arrays.
 Memory overhead: Each node requires extra space for the reference, impacting memory usage slightly.
 Overall, the "strict structure based on the Node and LinkedList classes" provides a well-defined, efficient, and adaptable approach for organizing and managing linear data in programming.
+
+// by using class we implementing programing principle DRY (Don't repeat yourself)
+
+/** By using classes helps significantly in adhering to the DRY (Don't Repeat Yourself) principle. Let's see how this applies to the Node and LinkedList example:
+
+The Problem Without Classes:
+
+If you didn't have classes, you'd likely represent each node and its functionality using individual variables, arrays, or structures:*/
+
+// JavaScript;
+// Without Classes
+
+var node1Data = 5;
+var node1Next = null;
+
+var node2Data = 10;
+var node2Next = node1Data; // reference to node 1
+
+// Functions to manipulate data or references
+/* Use code with caution.
+In this case, any time you need a new node, you would have to repeat the pattern of declaring the data variable and corresponding pointer.  This leads to repetition and makes the code inefficient.
+
+The Benefits of Classes:
+
+Classes solve this by encapsulating the Node and LinkedList concepts: 
+
+JavaScript */
+/* class Node {
+  constructor(data) {
+    this.data = data;
+    this.next = null;
+  }
+}
+
+class LinkedList {
+  constructor() {
+    this.head = null;
+  }
+
+  addNode(data) {
+    // ... add new node
+  }
+
+  removeNode(data) {
+    // ... remove a node
+  }
+} */
+
+/* Use code with caution.
+Now, instead of repeating the code for each node:
+
+Abstraction: The Node class provides a blueprint for creating nodes with consistent data representation and linking behavior.
+Reusability: You can create as many nodes as needed using the Node class template (new Node(data)).
+Encapsulation: Logic for managing the linked list (adding, removing, etc.) resides within the LinkedList class, preventing accidental corruption of node relationships.
+How DRY is Applied:
+
+The DRY principle is in action because using classes:
+
+Eliminates Repetitive Code Structure: You write the code to define a node and its relationship to other nodes once within the Node class.
+
+Provides a Single Source of Truth: The Node and LinkedList classes become the authoritative way to create and manipulate  linked list structures throughout your code.
+
+Enhances Maintainability:  Changes to node behavior only need to be made in one place (the Node class),  instead of changing every single instance of a node throughout your code.
+
+In Conclusion: Classes enable the DRY principle by encouraging well-defined templates, reducing redundancy, promoting reusability, and improving maintainability.  Certainly, there are other ways to achieve DRY principles, but classes provide a structured and object-oriented approach to organizing code. */
+
+/*****
+     ******* 
+     prepend(newNode)
+
+This method prepends a new node to the beginning of the linked list.
+ It takes a single argument, newNode, which should be an instance of the Node class containing the data you want to insert.
+if the head is empty it will add given value as first node.
+Returns:
+
+The method returns the LinkedList object itself, allowing for method chaining (e.g., linkedList.prepend(node1).prepend(node2)).
+
+Throws:
+
+An Error if newNode is null.  
+*/
