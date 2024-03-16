@@ -134,6 +134,18 @@ class LinkedList {
 
        
     }
+    reverse() {
+        let node = this.head;
+        let prev = null;
+        let next = null;
+
+        while(node !== null) {
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = node.next;
+        }
+    }
 
     print() {
         let node = this.head;
@@ -152,12 +164,7 @@ console.log(list);
 list.append(1);
 list.append(2);
 list.append(3);
-list.prepend(0)
-
-list.deleteLast()
-list.deleteLast()
-list.deleteLast()
-
+list.reverse()
 
 
 list.print();
