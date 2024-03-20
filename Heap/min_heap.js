@@ -1,86 +1,98 @@
 
-
-class MinHeap {
-    constructor(array) {
-        
-        this.heap = [];
-        
-        
+class Node {
+    constructor(data){
+      this.data = data;
+      this.left = null;
+      this.right = null;
     }
-
-    build(array){
-        this.heap = array;
-        
-        for(let i = this.parent(this.heap.length - 1); i >= 0; i--) {
-           this._shiftDown(i)
-        }
+  }
+  class MinHeap {
+    constructor() {
+      this.root = null;
     }
-    _shiftDown(currentIdx) {
-        let heap = this.heap;
-        let endIdx = heap.length - 1;
-        let leftChild = this.leftChild(currentIdx);
-        let rightChild = this.rightChild(currentIdx);
-
-        while(leftChild <= endIdx) {
-            let valueToShift = leftChild;
-
-            if(rightChild <= endIdx && heap[rightChild] < heap[leftChild]) {
-                valueToShift = rightChild;
-            }
-
-            if(heap[currentIdx] > heap[valueToShift]) {
-                this.swap(heap, currentIdx, valueToShift);
-            
-                currentIdx = valueToShift;
-                leftChild = this.leftChild(currentIdx);
-                rightChild = this.rightChild(currentIdx);
-
-            } else {
-                return;
-            }
-        }
+  
+    heapfyDown(currentIdx) {
+      let minHeap = this.root;
+      let endIdx = this.root.length - 1;
+      let leftChildIdx = this.leftChild(currentIdx);
+      let rightChildIdx = this.rightChild(currentIdx);
+  
+      while(leftChildIdx <= endIdx) {
+         let valueToShift = leftChildIdx;
+         console.log('hi')
+  
+         if(rightChildIdx <= endIdx && minHeap[rightChildIdx] < minHeap[leftChildIdx]) {
+           valueToShift = rightChildIdx;
+         }
+  
+         if(minHeap[currentIdx] > minHeap[valueToShift]) {
+           this.swap(currentIdx, valueToShift);
+  
+           currentIdx = valueToShift;
+           leftChildIdx = this.leftChild(currentIdx);
+           rightChildIdx = this.rightChild(currentIdx);
+         } else {
+            return 
+         }
+      }
     }
-
-    _shiftUp(currentIdx) {
-        let heap = this.heap;
-        let parentIdx = this.parent(currentIdx);
-        while(currentIdx > 0 && heap[parentIdx] > heap[currentIdx]) {
-            this.swap(heap, currentIdx, parentIdx);
-            currentIdx = parentIdx;
-            parentIdx = this.parent(currentIdx);
-        }
+  
+  heapfyUp(currentIdx) {
+    let heap = this.root;
+     let parentIdx = this.parent(currentIdx);
+     while(currentIdx > 0 && heap[currentIdx] > heap[parentIdx]) {
+         this.swap(currentIdx, parentIdx);
+         currentIdx = parentIdx;
+         parentIdx = this.parent(currentIdx); 
+     }
+  }
+  
+  build(array) {
+    this.root = array;
+    const lastParent = this.parent(array.length - 1);
+    for(let i = lastParent; i >= 0; i--) {
+      this.heapfyDown(i);
     }
-
-    remove() {
-        this.swap(this.heap, 0, this.heap.length - 1);
-        this.heap.pop();
-        this._shiftDown(0);
+  }
+  
+  insert(val) {
+    const heap = this.root;
+    heap.push(val);
+    this.heapfyUp(heap.length - 1);
+  }
+  
+  remove() {
+    let minHeap = this.root;
+    this.swap(0, minHeap.length - 1);
+    minHeap.pop();
+    this.heapfyDown(0);
+  }
+  
+  extractMin() {
+    return this.root.pop();
+  }
+    parent(i) {
+      return Math.floor((i - 1) / 2);
     }
-
-    insert(val) {
-      this.heap.push(val);
-      this._shiftUp(this.heap.length - 1)
+  
+    leftChild(i) {
+      return 2 * i + 1;
     }
-    
-    parent(index) {
-        return Math.floor((index - 1) / 2);
+  
+    rightChild(i) {
+      return 2 * i + 2;
     }
-
-    leftChild(index) {
-       return 2 * index + 1;
+  
+    swap(firstIdx, secondIdx) {
+      const array = this.root;
+      let temp = array[firstIdx];
+      array[firstIdx] = array[secondIdx];
+      array[secondIdx] = temp;
     }
-
-    rightChild(index) {
-       return 2 * index + 2;
-    }
-    swap(array, Index1, index2) {
-        let temp = array[Index1];
-        array[Index1] = array[index2];
-        array[index2] = temp;
-    }
-}
-
-const minHeap = new MinHeap();
-minHeap.build([1, 5 , 8, 2, 4]);
-minHeap.remove()
-console.log(minHeap.heap)
+  }
+  
+  const minHeap = new MinHeap();
+  const arr = [10, 7, 5, 8, 2, 1]
+  minHeap.build(arr);
+  minHeap.remove()
+  console.log(minHeap)
