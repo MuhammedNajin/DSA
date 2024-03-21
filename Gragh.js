@@ -119,4 +119,4 @@ class Graph {
   graph.addEdge(1, 3, false);
   graph.addEdge(2, 3, false);
   console.log(graph.bfs(1));
-  console.log(graph.dfs(1));
+  console.log(graph.dfs(1))
