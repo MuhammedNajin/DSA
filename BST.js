@@ -5,14 +5,14 @@ class Node {
         this.left = null;
         this.right = null;
     }
-}
-
-
-class BinarySearchTree {
+  }
+  
+  
+  class BinarySearchTree {
     constructor() {
         this.root = null;
     }
-
+  
     insert(val) {    
       if(val === undefined){
         throw new Error('we cant insert null to tree');
@@ -22,10 +22,10 @@ class BinarySearchTree {
           this.root = newNode;
           return this;
       }
-
+  
      return this.insertNode(this.root, newNode);
     }
-
+  
     insertNode(node, newNode) {
         if(newNode.data < node.data) {
             if(node.left === null){
@@ -96,7 +96,7 @@ class BinarySearchTree {
       }
       return false;
     }
-
+  
     remove(val) {
         this.root = this.removeNode(this.root, val);
        }
@@ -120,7 +120,7 @@ class BinarySearchTree {
             if(node.left === null) {
                 node = node.right;
                 return node;
-
+  
             } else if(node.right === null) {
                 node = node.left;
                 return node;
@@ -134,7 +134,7 @@ class BinarySearchTree {
            
          }
        }
-
+  
    findMinNode(node) {
     console.log('node in min',node, node.data)
      if(node.left === null) {
@@ -150,16 +150,21 @@ class BinarySearchTree {
         return this.findMaxNode(node.right);
     }
    }
-
+  
    findCloseValue(target, node) {
       
    }
-   inorder(node = this.root) {
+   inorder(node = this.root, result = {count: 0, s: null}) {
      if(node != null) {
-        this.inorder(node.left);
+      
+        this.inorder(node.left, result);
         process.stdout.write(`${node.data} `);
-        this.inorder(node.right);
+        if(++result.count == 2) {
+          result.s = node.data;
+        }
+        this.inorder(node.right, result);
      }
+     return result;
    }
    preOrder(node= this.root) {
     if(node != null){
@@ -175,23 +180,80 @@ class BinarySearchTree {
         process.stdout.write(`${node.data} `);
      }
    }
-}
-
-const bst = new BinarySearchTree();
-bst.insert(10)
-bst.insert(15)
-bst.insert(3)
-bst.insert(1)
-bst.insert(7)
-
-
-console.log(bst)
-
-
-console.log(bst.contains(bst.root, 3));
-bst.inorder()
-console.log('\n')
-bst.preOrder();
-console.log('\n');
-bst.postOrder()
-
+  
+   isBst(node = this.root, min = -Infinity, max = Infinity) {
+      if(node === null) {
+        return true;
+      }
+     
+  
+      if(node.data >= min &&  node.data >= max) {
+        return false
+      }
+  
+      return this.isBst(node.left, min, node.data) && this.isBst(node.right, node.data, max);
+   } 
+  
+   lowestCommonAncestor(p, q, node = this.root) {
+    if (node === null || node === p || node === q) {
+        return node;
+    }
+  
+    const left = this.lowestCommonAncestor(p, q, node.left);
+    const right = this.lowestCommonAncestor(p, q, node.right);
+  
+    if (left && right) {
+        return node; // Return the node itself
+    }
+  
+    return left || right;
+  }
+  
+   findClose(target) {
+      let current = this.root;
+      let closest = current.data;
+      while(current !== null) {
+          if(Math.abs(target - closest) > Math.abs(target - current.data)) {
+  
+             closest = current.data;
+          }
+  
+          if(target < current.data) {
+            current = current.left;
+          }else if(target > current.data) {
+            current = current.right;
+          } else {
+            break;
+          } 
+          console.log('c')
+          //   return node.data;
+          // }
+      }
+      return closest;
+   }
+  }
+  
+  const bst = new BinarySearchTree();
+  bst.insert(10)
+  bst.insert(15)
+  bst.insert(3)
+  bst.insert(1)
+  bst.insert(7)
+  console.log(bst.inorder())
+  
+  
+  console.log(bst.lowestCommonAncestor(1, 7))
+  console.log(bst.findClose(3))
+  
+  
+  // console.log(bst.contains(bst.root, 3));
+  // bst.inorder()
+  // console.log('\n')
+  // bst.preOrder();
+  // console.log('\n');
+  // bst.postOrder()
+  
+  
+  
+  
+  

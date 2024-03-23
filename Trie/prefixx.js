@@ -1,75 +1,92 @@
-
 class TrieNode {
-    constructor(){
-        this.children = new Map();
-        this.end = false;
-    }
-}
-
-class Trie {
     constructor() {
-        this.root = new TrieNode()
+      this.children = {};
+      this.end = false;
     }
-
-    insert(words) {
-       let node = this.root;
-       for(let i = 0; i < words.length; i++) {
-          const char = words[i];
-          if(!node.children.get(char)) {
-             node.children.set(char, new TrieNode());
-          }
-          node = node.children.get(char);
-       }
-         node.end = true;
+  }
+  
+  class Trie {
+    constructor() {
+      this.root = new TrieNode();
     }
-
-    search(words) {
-        let node = this.root;
-        for(let i = 0; i < words.length; i++) {
-            const char = words[i];
-            if(!node.children.get(char)) {
-                return false;
-            }
-            node = node.children.get(char);
+  
+    insert(word) {
+      let node = this.root;
+      for (const char of word) {
+        if (!node.children[char]) {
+          node.children[char] = new TrieNode();
         }
-        return node.end;
+        node = node.children[char];
+      }
+      node.end = true;
     }
-
+  
+    search(word) {
+      let node = this.root;
+      for (let char of word) {
+        if (!node.children[char]) {
+          return false;
+        }
+        node = node.children[char];
+      }
+      return node.end;
+    }
+  
     startsWith(prefixx) {
-        let node = this.root;
-        for(let i = 0; i < prefixx.length; i++) {
-            const char = prefixx[i];
-            if(!node.children.get(char)) {
-                return false;
-            }
+      let node = this.root;
+      for (let i = 0; i < prefixx.length; i++) {
+        const char = prefixx[i];
+        if (!node.children.get(char)) {
+          return false;
         }
-
-        return true;
+      }
+      return true;
     }
-
-    findAllWordsWithPrefix(prefix, node = this.root, currentWord = prefix, result = []) {
-        // If node is null or prefix is empty, return
-        if (!node || prefix.length === 0) {
-            return;
-        }
-    
-        // If prefix is empty and node is end of a word, add current word to result
-        if (prefix.length === 0 && node.isEndOfWord) {
-            result.push(currentWord);
-        }
-    
-        // Traverse child nodes recursively
-        for (let [char, childNode] of node.children.entries()) {
-            this.findAllWordsWithPrefix(prefix.slice(1), childNode, currentWord + char, result);
-        }
-    
-        return result;
+    findAllwords(word, node = this.root, index = 0) {
+      if (node.end === true) {
+        return node.children[index];
+      }
     }
-}
-
-const trie = new Trie();
-trie.insert('apple')
-trie.insert('app')
-trie.insert('application');
-console.log(trie.search('app'))
-console.log(trie.findAllWordsWithPrefix('app'))
+    deleteWord(root, word) {
+      console.log('root',root)
+      if (!root) {
+        console.log('1')
+        return null;
+        
+      }
+  
+      if (word.length === 0) {
+          // If we are at the end of the word and it is the end of a word
+          if (root.end) {
+              root.end = false;
+          }
+  
+          // If the root does not have any children and is not the end of another word, delete it
+          if (Object.keys(root.children).length === 0 && !root.end) {
+              root = null;
+              return root;
+          }
+      } else {
+          let char = word[0];
+          if (root.children[char]) {
+              root.children[char] = this.deleteWord(root.children[char], word.slice(1));
+  
+              // If the child node is null and the current node is not the end of a word, delete the child node
+              if (root.children[char] === null && !root.end) {
+                  delete root.children[char];
+              }
+          }
+      }
+      return root;
+  }
+  }
+  
+  const trie = new Trie();
+  trie.insert("apple");
+  trie.insert("app");
+  trie.insert("application");
+  console.log(trie.search("apple"));
+  trie.deleteWord(trie.root, 'app')
+  console.log(trie.search('app'))
+  console.log(trie.search('apple'))
+  
