@@ -42,11 +42,13 @@ class TrieNode {
       }
       return true;
     }
+    
     findAllwords(word, node = this.root, index = 0) {
       if (node.end === true) {
         return node.children[index];
       }
     }
+
     deleteWord(root, word) {
       console.log('root',root)
       if (!root) {
@@ -54,13 +56,11 @@ class TrieNode {
         return null;
         
       }
-  
       if (word.length === 0) {
           // If we are at the end of the word and it is the end of a word
           if (root.end) {
               root.end = false;
           }
-  
           // If the root does not have any children and is not the end of another word, delete it
           if (Object.keys(root.children).length === 0 && !root.end) {
               root = null;
@@ -80,7 +80,7 @@ class TrieNode {
       return root;
   }
   }
-  
+
   const trie = new Trie();
   trie.insert("apple");
   trie.insert("app");
